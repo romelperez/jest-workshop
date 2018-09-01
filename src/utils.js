@@ -1,9 +1,9 @@
 /**
- * Gets a report of the airplane physical conditions.
- * @param  {Object}  airplane - Airplane state.
+ * Consigue las condiciones físicas del avión en base a su estado actual.
+ * @param  {Object}  airplane - Estado del avión.
  * @return {Object}
  */
-const getAirplaneConditions = airplane => {
+function getAirplaneConditions(airplane) {
   const { y, fuel, speed, acceleration } = airplane;
 
   const isTooHigh = y > 300;
@@ -16,6 +16,6 @@ const getAirplaneConditions = airplane => {
   const isOk = !(isTooHigh || isTooLow || isOff || isOutOfFuel || isTooFast || isTooFastOnGround);
 
   return { isOk, isTooHigh, isTooLow, isOff, isOutOfFuel, isTooFast, isTooFastOnGround };
-};
+}
 
 module.exports = { getAirplaneConditions };

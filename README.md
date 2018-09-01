@@ -11,7 +11,7 @@ en [Node.js](https://nodejs.org).
 
 Apoyado en la charla [**Testing en JavaScript con Jest**](https://romelperez.com/talks/testing-javascript-jest).
 
-## Workshop
+## Taller
 
 El taller consiste en arreglar un sistema animado autocontrolado de aterrizaje
 de un avión en vuelo.
@@ -19,6 +19,13 @@ de un avión en vuelo.
 Un elemento que representa un avión debe tener un sistema automático de aterrizaje
 que tomará acción cuando se entre en la zona de aterrizaje. Se desacelerará hasta
 llegar a velocidad 0 y debe descender hasta tocar suelo.
+
+Se considera que ha llegado a la zona de aterrizaje si la distancia desde el avión
+al inicio de la zona de aterrizaje es mayor o igual a 0.
+
+El sistema autocontrolado o piloto, tendrá definido cuánto puede acelerar o
+desacelerar y cuánto puede inclinarse hacia arriba o abajo cuando pueda tomar
+acción de aterrizaje.
 
 Si alguna de las siguientes condiciones se cumple, el avión explotará:
 
@@ -29,13 +36,13 @@ Si alguna de las siguientes condiciones se cumple, el avión explotará:
 - Accelera a más de 100 px/s2.
 - Va a más de 300 px/s en el suelo.
 
-El objetivo es aterrizar el avión y que se encuentre a velocidad 0 px/s,
+El objetivo es aterrizar el avión y que se encuentre a velocidad ~0 px/s,
 aceleración 0 px/s2, una altura muy cercana a 0, una velocidad muy cercana a 0,
 con combustible, dentro de la zona de aterrizaje.
 
 ![ScreenShot](screenshot.jpg)
 
-Esta es la versión de inicio del taller.
+## Cómo usarlo?
 
 ### Clonar
 

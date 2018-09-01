@@ -3,13 +3,13 @@
 const { createEngine } = require('./createEngine');
 
 describe('createEngine()', () => {
-  it('Should return a function', () => {
+  it('Debe retornar una función al ser creada', () => {
     const received = typeof createEngine({});
     const expected = 'function';
     expect(received).toBe(expected);
   });
 
-  it('Should call nextFrame with engine ref', () => {
+  it('Debe usar "nextFrame" con la referencia al "engine"', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const getAirplaneConditions = jest.fn().mockReturnValue({ isOk: false });
@@ -24,7 +24,7 @@ describe('createEngine()', () => {
     expect(nextFrame).toHaveBeenCalledWith(engine);
   });
 
-  it('Should call render with simulator ref', () => {
+  it('Debe llamar "render" con la referencia a "simulator"', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const getAirplaneConditions = jest.fn().mockReturnValue({ isOk: false });
@@ -39,7 +39,7 @@ describe('createEngine()', () => {
     expect(render).toHaveBeenCalledWith(simulator);
   });
 
-  it('Should update duration and lastTimestamp', () => {
+  it('Debe actualizar "duration" y "lastTimestamp"', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const getAirplaneConditions = jest.fn().mockReturnValue({ isOk: false });
@@ -55,7 +55,7 @@ describe('createEngine()', () => {
     expect(simulator.time.lastTimestamp).toBe(100);
   });
 
-  it('Should call pilot with simulator ref if airplane condition is ok', () => {
+  it('Debe llamar "pilot" con la referencia a "simulator" si las condiciones de vuelo se encuentran bien', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const pilot = jest.fn();
@@ -71,7 +71,7 @@ describe('createEngine()', () => {
     expect(pilot).toHaveBeenCalledWith(simulator);
   });
 
-  it('Should update airplane.x with current simulator conditions and timestamp difference (1 second)', () => {
+  it('Debe actualizar "airplane.x" con las condiciones actuales y en diferencia de tiempo 1 segundo', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const pilot = jest.fn();
@@ -88,7 +88,7 @@ describe('createEngine()', () => {
     expect(simulator.airplane.x).toBe((1000 * 100) / 1000);
   });
 
-  it('Should update airplane.y with current simulator conditions and timestamp difference (1 second)', () => {
+  it('Debe actualizar "airplane.y" con las condiciones actuales y en diferencia de tiempo 1 segundo', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const pilot = jest.fn();
@@ -105,7 +105,7 @@ describe('createEngine()', () => {
     expect(simulator.airplane.y).toBe((1000 * 10) / 66);
   });
 
-  it('Should update airplane.fuel with current simulator conditions and timestamp difference (1 second)', () => {
+  it('Debe actualizar "airplane.fuel" con las condiciones actuales y en diferencia de tiempo 1 segundo', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const pilot = jest.fn();
@@ -122,7 +122,7 @@ describe('createEngine()', () => {
     expect(simulator.airplane.fuel).toBe(-(1000 * 100) / 1e5);
   });
 
-  it('Should update airplane.speed with current simulator conditions and timestamp difference (1 second)', () => {
+  it('Debe actualizar "airplane.speed" con las condiciones actuales y en diferencia de tiempo 1 segundo', () => {
     const nextFrame = jest.fn();
     const render = jest.fn();
     const pilot = jest.fn();

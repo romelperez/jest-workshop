@@ -1,36 +1,41 @@
 /**
- * Create an engine with provided dependencies.
- * @param  {Object} dependencies
- * @param  {Object} dependencies.simulator - Simulator state ref.
- * @param  {Function} dependencies.nextFrame - requestAnimationFrame function.
- * @param  {Function} dependencies.render - To render UI with simulator ref.
- * @param  {Function} dependencies.pilot - To call pilot system.
- * @param  {Function} dependencies.getAirplaneConditions - To get airplane conditions.
- * @return {Function} - The engine system. It will receive the frame timestamp.
+ * Crear la maquina de ejecución de la simulación del vuelo del avión.
+ * @param  {Object} dependencies - Dependencias.
+ * @param  {Object} dependencies.simulator - Estado de la simulación.
+ * @param  {Function} dependencies.nextFrame - función "requestAnimationFrame".
+ * @param  {Function} dependencies.render - Renderizar interfaz.
+ * @param  {Function} dependencies.pilot - Piloto.
+ * @param  {Function} dependencies.getAirplaneConditions - Consigue las condiciones
+ * de vuelo actuales.
+ * @return {Function} - La máquina de simulación creada. Recibe el timestamp del
+ * frame actual.
  */
-const createEngine = dependencies => {
+function createEngine(dependencies) {
   const { simulator, nextFrame, render, pilot, getAirplaneConditions } = dependencies;
 
-  const engine = (timestamp = 0) => {
+  // Recibe timestamp del frame actual.
+  function engine(timestamp = 0) {
     const { time, airplane } = simulator;
     const { isOk } = getAirplaneConditions(airplane);
+
+    // Diferencia de tiempo en milisegundos del último frame con este.
     const timeDiff = timestamp - time.lastTimestamp;
 
     if (isOk) {
       pilot(simulator);
 
-      // Only affected by the airplane speed.
+      // Sólo afectado por la velocidad del avión.
       const xDiff = (timeDiff * airplane.speed) / 1000;
 
-      // Only affected by the airplane tilt.
+      // Sólo afectado por la inclinación del avión.
       // Inclination 1deg = ~15px per second.
       const yDiff = (timeDiff * airplane.inclination) / 66;
 
-      // Only affected by the airplane speed.
+      // Sólo afectado por la velocidad del avión.
       // Speed 1px/ms2 = 0.01units per second.
       const fuelDiff = -(timeDiff * airplane.speed) / 1e5;
 
-      // Only affected by the airplane acceleration.
+      // Sólo afectado por la aceleración del avión.
       const speedDiff = (timeDiff * airplane.acceleration) / 1000;
 
       airplane.x += xDiff;
@@ -45,9 +50,9 @@ const createEngine = dependencies => {
     render(simulator);
 
     nextFrame(engine);
-  };
+  }
 
   return engine;
-};
+}
 
 module.exports = { createEngine };

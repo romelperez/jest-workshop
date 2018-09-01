@@ -5,8 +5,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "lint": "eslint --cache --quiet ./src/**",
-    "test": "jest",
-    "test-dev": "jest --watch"
+    "test": "jest --verbose",
+    "test-dev": "jest --verbose --watch"
   },
   "dependencies": {
     "webpack": "^4.16.5",

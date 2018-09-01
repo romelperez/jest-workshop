@@ -37,7 +37,7 @@ html, body {
   background-size: cover;
 }
 
-/* AIRPLANE */
+/* AVIÓN */
 
 .airplane {
   position: absolute;
@@ -62,7 +62,7 @@ html, body {
   background-size: contain;
 }
 
-/* STATUS */
+/* ESTADO */
 
 .status {
   display: flex;
@@ -106,7 +106,7 @@ html, body {
   word-break: break-all;
 }
 
-/* CONDITIONS */
+/* CONDICIONES */
 
 .conditions {
   display: block;

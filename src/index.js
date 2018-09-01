@@ -6,38 +6,38 @@ const { renderStatus } = require('./renderStatus');
 const { renderConditions } = require('./renderConditions');
 const { getAirplaneConditions } = require('./utils');
 
-// The application state. It contains the DOM element references, the time status,
-// the panorama, landing and airplane actors state in the simulation.
-// All changes in the simulation and mutated here, since we don't have an
-// immutable system.
+// El estado de la simulación. Contiene los elements DOM, el estado del tiempo,
+// el panorama, y los estados del área de aterrizaje y el avión.
+// Todos los cambios en la simulación son mutados acá, teniendo en cuenta que no
+// tenemos un sistema immutable.
 const simulator = {
 
-  // DOM references.
+  // Referencias al DOM.
   panoramaEl: document.querySelector('.panorama'),
   airplaneEl: document.querySelector('.airplane'),
   statusEl: document.querySelector('.status'),
   conditionsEl: document.querySelector('.conditions'),
 
-  // Simulation time status.
+  // Estado del tiempo.
   time: {
     startTimestamp: -20000, // ms
     lastTimestamp: 0, // ms
     duration: 0 // ms
   },
 
-  // Panorama/Ambient actor.
+  // Estado del panorama o ambiente.
   panorama: {
     width: 1000, // px
     height: 450, // px
     undergroundHeight: 150 // px
   },
 
-  // Landing zone actor.
+  // Estado de la zona de aterrizaje.
   landing: {
     x: 13000
   },
 
-  // Airplane actor.
+  // Estado del avión.
   airplane: {
     width: 135, // px
     height: 47, // px
@@ -50,7 +50,7 @@ const simulator = {
   }
 };
 
-// Update UI components with current simulation data state.
+// Para actualizar la interfaz con el estado actual.
 const render = data => {
   renderPanorama(data);
   renderAirplane(data);
@@ -58,17 +58,19 @@ const render = data => {
   renderConditions(data);
 };
 
-// Create a pilot system to take decisions on flying time.
+// Crear un piloto para que tome decisiones en tiempo de vuelo.
 const pilot = createPilot({
 
-  // The acceleration it will take when speeding up or down is needed.
+  // Esta es la aceleración que el piloto puede poner al avión hacia arriba
+  // o abajo dependiendo de la maniobra.
   accelerate: 90, // px/s2
 
-  // The tilt the airplane will take when ascending or descending is needed.
+  // Esta es la inclinación que el piloto puede poner al avión hacia arriba
+  // o abajo dependiendo de la maniobra.
   tilt: 5 // degress
 });
 
-// Create an engine for the airplane.
+// Crear la maquina que se encarga de correr la simulación de todos los actores.
 const engine = createEngine({
   simulator,
   nextFrame: window.requestAnimationFrame,
@@ -77,8 +79,8 @@ const engine = createEngine({
   getAirplaneConditions
 });
 
-// Start the engine for the first time.
-// It will take control over the system and delegate tasks.
+// Iniciar la maquina por primera vez. Ésta tomará control de los actores
+// y delegará tareas cuando sea necesario.
 engine();
 
 window.simulator = simulator;

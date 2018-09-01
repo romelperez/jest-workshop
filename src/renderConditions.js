@@ -1,6 +1,11 @@
 const { getAirplaneConditions } = require('./utils');
 
-const renderConditions = ({ conditionsEl, airplane }) => {
+/**
+ * Renderiza las condiciones actuales de vuelo.
+ * @param  {Object} simulator - Estado de la simulación.
+ */
+function renderConditions(simulator) {
+  const { conditionsEl, airplane } = simulator;
   const {
     isTooHigh,
     isTooLow,
@@ -10,28 +15,28 @@ const renderConditions = ({ conditionsEl, airplane }) => {
     isTooFastOnGround
   } = getAirplaneConditions(airplane);
 
-  let currentStatus = 'All systems working OK';
+  let currentStatus = 'Todos los sistemas funcionando bien.';
 
   if (isTooHigh) {
-    currentStatus = 'Airplane is too high.';
+    currentStatus = 'El avión está muy alto.';
   }
   else if (isTooLow) {
-    currentStatus = 'Airplane is under the floor.';
+    currentStatus = 'El avión está bajo suelo.';
   }
   else if (isOff) {
-    currentStatus = 'Airplane is above ground with no speed.';
+    currentStatus = 'El avión está sin movimiento en el aire.';
   }
   else if (isOutOfFuel) {
-    currentStatus = 'Airplane has ran out of fuel.';
+    currentStatus = 'Se ha acabado el combustible.';
   }
   else if (isTooFast) {
-    currentStatus = 'Airplane got too fast.';
+    currentStatus = 'El avión voló a demasiada velocidad.';
   }
   else if (isTooFastOnGround) {
-    currentStatus = 'Airplane got too fast on the ground.';
+    currentStatus = 'El avión se movía muy rápido en el suelo.';
   }
 
   conditionsEl.innerHTML = currentStatus;
-};
+}
 
 module.exports = { renderConditions };
